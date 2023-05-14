@@ -31,7 +31,7 @@ def recommend(id):
     # Get the pairwise similarity scores between the input Property and all the properties
     sim_scores = list(enumerate(cosine_sim[idx]))
 
-    # Sort the wines based on the similarity scores
+    # Sort the properties based on the similarity scores
     sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
 
     # Select the top three similarity scores
