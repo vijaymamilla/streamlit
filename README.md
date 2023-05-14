@@ -2,6 +2,7 @@
 Streamlit Project with ML and Docker Integration
 
 Step 1- Open the project in Pycham or VS code
+
 source venv/bin/activate
 
 Step 2- Open Terminal and run the following commands 
