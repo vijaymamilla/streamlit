@@ -4,7 +4,7 @@ import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import linear_kernel
 
-st.header("Recommendation by user")
+st.header("Recommendations")
 
 @st.cache_data
 def dataframe_data():
@@ -65,7 +65,17 @@ def recommend(id):
 
 #dataframe_data()
 #get_consine_similary()
-recommend('bproperty-18')
+#recommend('bproperty-18')
 
+#st.write(dataframe_data().sample(20))
 
+property_ids = ['bproperty-16397','bproperty-12695','bproperty-8291','bproperty-11703','bproperty-3108','bproperty-7982','bproperty-12744','bproperty-6573','bproperty-15630','bproperty-13185','bproperty-6116','bproperty-565','bproperty-17196','bproperty-14922','bproperty-8646','bproperty-14182','bproperty-3501','bproperty-6991','bproperty-2683','bproperty-11348' ]
 
+option = st.selectbox(
+    'Select the property?',
+    property_ids)
+
+if option:
+    st.write('You selected:', option)
+
+    recommend(option)
