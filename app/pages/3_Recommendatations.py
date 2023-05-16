@@ -11,7 +11,6 @@ st.header("Recommendations")
 @st.cache_data
 def dataframe_data():
 
-    #return pd.read_csv('app/artifactory/bl_tdidf_processed.csv')
     return pd.read_csv('app/artifactory/bl_property_processed.csv')
 
 @st.cache_data
@@ -59,8 +58,9 @@ def sbert_recommendation(query):
 @st.cache_data
 def buildingModel():
     tf_idf = TfidfVectorizer(ngram_range=(2, 2), stop_words="english")
+    df = dataframe_data()
 
-    tfidf_matrix = tf_idf.fit_transform(dataframe_data()['overview'])
+    tfidf_matrix = tf_idf.fit_transform(df['recommend_text'])
 
     cosine_sim = linear_kernel(tfidf_matrix, tfidf_matrix)
 
