@@ -36,7 +36,9 @@ def show_search_query():
             for index in top_n_indices:
                 building_type = df.iloc[index]['building_type']
                 building_nature = df.iloc[index]['building_nature']
-                locality = df.iloc[index]['locality']
+
+                city = df.iloc[index]['city']
+                zone = df.iloc[index]['zone']
                 price = df.iloc[index]['price']
                 property_description = df.iloc[index]['property_description']
                 image_url = df.iloc[index]['image_url']
@@ -45,7 +47,7 @@ def show_search_query():
                 st.image(image_url, caption="Property Image", width=100)
                 st.markdown(f"**Property Type:** {building_type}")
                 st.markdown(f"**Buiding Nature:** {building_nature}")
-                st.markdown(f"**Location:** {locality}")
+                st.markdown(f"**zone:** {zone} **City: {city} ")
                 st.markdown(f"**Price:** {price}")
                 st.markdown(f"**Property Page:** [Link]({property_url})", unsafe_allow_html=True)
                 st.markdown(f"**Description:** {property_description}")

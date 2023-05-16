@@ -11,7 +11,8 @@ st.header("Recommendations")
 @st.cache_data
 def dataframe_data():
 
-    return pd.read_csv('app/artifactory/bl_tdidf_processed.csv')
+    #return pd.read_csv('app/artifactory/bl_tdidf_processed.csv')
+    return pd.read_csv('app/artifactory/bl_property_processed.csv')
 
 @st.cache_data
 def dataframe_data_transformer():
@@ -38,7 +39,9 @@ def sbert_recommendation(query):
             for index in top_n_indices:
                 building_type = df.iloc[index]['building_type']
                 building_nature = df.iloc[index]['building_nature']
-                locality = df.iloc[index]['locality']
+
+                city = df.iloc[index]['city']
+                zone = df.iloc[index]['zone']
                 price = df.iloc[index]['price']
                 property_description = df.iloc[index]['property_description']
                 image_url = df.iloc[index]['image_url']
@@ -47,7 +50,7 @@ def sbert_recommendation(query):
                 st.image(image_url, caption="Property Image", width=100)
                 st.markdown(f"**Property Type:** {building_type}")
                 st.markdown(f"**Buiding Nature:** {building_nature}")
-                st.markdown(f"**Location:** {locality}")
+                st.markdown(f"**Zone:** {zone} **City: {city} ")
                 st.markdown(f"**Price:** {price}")
                 st.markdown(f"**Property Page:** [Link]({property_url})", unsafe_allow_html=True)
                 st.markdown(f"**Description:** {property_description}")
@@ -89,7 +92,9 @@ def recommend(id):
         for index in property_idx_list:
             building_type = df.iloc[index]['building_type']
             building_nature = df.iloc[index]['building_nature']
-            locality = df.iloc[index]['locality']
+
+            city = df.iloc[index]['city']
+            zone = df.iloc[index]['zone']
             price = df.iloc[index]['price']
             property_description = df.iloc[index]['property_description']
             image_url = df.iloc[index]['image_url']
@@ -98,13 +103,14 @@ def recommend(id):
             st.image(image_url, caption="Property Image", width=100)
             st.markdown(f"**Property Type:** {building_type}")
             st.markdown(f"**Buiding Nature:** {building_nature}")
-            st.markdown(f"**Location:** {locality}")
+            st.markdown(f"**Zone:** {zone} **City: {city} ")
             st.markdown(f"**Price:** {price}")
             st.markdown(f"**Property Page:** [Link]({property_url})", unsafe_allow_html=True)
             st.markdown(f"**Description:** {property_description}")
             st.write("---")
 
-property_dist = {'bproperty-16397':'Flat Can Be Found In Mohakhali For Sale, Near Mohakhali Dakkhin Para Jame Masjid','bproperty-12695': 'Business Space Is Up For Rent In The Most Convenient Location Of Banani Near Banani Bidyaniketan School & College','bproperty-8291': '8745 Sq Ft Commercial Space With Suitable Commercial Approaches For Rent In Double Mooring, Agrabad','bproperty-11703': '1950 Sq Ft Apartment For Rent In Gulshan 2 Near Ebl','bproperty-3108': 'Reside In This 2000 Square Feet Apartment For Rent In Mohammadpur, Iqbal Road','bproperty-7982': 'To Get A Trouble Free Life You Can Take Rent This 1200 Sq Ft House In Barontek','bproperty-12744': '1480 SFT Apartment For Sale In Extension Pallabi, Mirpur','bproperty-6573': 'Visit This Building For Sale In Adabor Near Maak Genius School','bproperty-15630': 'Don’t Waste Your Valuable Time! You Can Buy This 1650 Sq Ft Flat For Sale In Bochila','bproperty-13185': 'Reasonable 860 Sq Ft Under Constructed Flat Is Available For Sale In Mohammadpur Near To Dhaka Udyan Government College','bproperty-6116': 'Verify The Benefits Of This 2500 Sq Ft Office For Rent At South Agrabad Ward','bproperty-565': 'Buy This 2100 Square Feet Splendid Flat Available In Bashundhara R-a, Block I','bproperty-17196': 'Nice 1800 Sq Ft Home Is Available To Rent In Dhanmondi','bproperty-14922': 'Choose The Option Of Buying This 1300 Sq Ft Apartment In Mirpur 12','bproperty-8646': 'Residential Plot Is Available For Sale In Fatulla','bproperty-14182': '1672 Sq Ft Lovely Flat For Sale At 7 No. West Sholoshohor Ward','bproperty-3501': 'Buy This 1250 Square Feet Flat Available In Bashundhara R-a','bproperty-6991': 'Nicely Planned Flat Of 1888 Sq Ft In Bashundhara R-a For Rent Nearby North South University','bproperty-2683': 'A well-constructed 1100 SQ FT flat is for sale in Mirpur, Block A','bproperty-11348': '1500 Sq Ft Residential Apartment For Sale In Eastern Pallabi, Mirpur'}
+
+property_dist = { 'bproperty-4910':'This 875.0 square feet Area of the Sale Apartment is a residential property with 2.0 bedrooms and 2.0 baths and priced at BDT 3700000.0 in Mohammadpur and zone in Mohammadpur', 'bproperty-815':'This 1365.0 square feet Area of the Sale Apartment is a residential property with 3.0 bedrooms and 3.0 baths and priced at BDT 9000000.0 in Tejgaon and zone in Tejgaon', 'bproperty-10970':'This 5600.0 Sq ft area of the Rent Apartment in a commercial property and priced at BDT 448000.00000000006 in Dhanmondi zone in Dhanmondi' ,'bproperty-983':'This 1290.0 square feet Area of the Sale Apartment is a residential property with 3.0 bedrooms and 3.0 baths and priced at BDT 7795000.0 in Mirpur and zone in Mirpur', 'bproperty-16944':'This 2700.0 square feet Area of the Rent Apartment is a residential property with 4.0 bedrooms and 4.0 baths and priced at BDT 100000.0 in Uttara and zone in Uttara', 'bproperty-6851':'This 1445.0 square feet Area of the Sale Apartment is a residential property with 3.0 bedrooms and 3.0 baths and priced at BDT 6936000.0 in Kachukhet and zone in Mirpur', 'bproperty-12551':'This 1835.0 Sq ft area of the Rent Office in a commercial property and priced at BDT 100000.0 in Paribagh zone in Ramna', 'bproperty-14977':'This 2200.0 square feet Area of the Rent Apartment is a residential property with 4.0 bedrooms and 3.0 baths and priced at BDT 45000.0 in Uttara and zone in Uttara', 'bproperty-8646':'This 950.0 square feet Area of the Sale Apartment is a residential property with 2.0 bedrooms and 2.0 baths and priced at BDT 4500000.0 in Mirpur and zone in Mirpur', 'bproperty-13573':'This 12000.0 Sq ft area of the Rent Floor in a commercial property and priced at BDT 300000.0 in Uttara zone in Uttara', 'bproperty-11375':'This 4000.0 Sq ft area of the Rent Office in a commercial property and priced at BDT 720000.0 in Tejgaon zone in Tejgaon', 'bproperty-4034':'This 1440.0 square feet Area of the Sale Apartment is a residential property with 3.0 bedrooms and 3.0 baths and priced at BDT 6500000.0 in Bayazid and zone in Chattogram City', 'bproperty-11802':'This 850.0 Sq ft area of the Rent Office in a commercial property and priced at BDT 10000.0 in Bayazid zone in Chattogram City', 'bproperty-16888':'This 1100.0 square feet Area of the Rent Apartment is a residential property with 3.0 bedrooms and 2.0 baths and priced at BDT 22000.0 in Aftab Nagar and zone in Khilgaon', 'bproperty-14657':'This 1676.0 square feet Area of the Rent Apartment is a residential property with 3.0 bedrooms and 3.0 baths and priced at BDT 35000.0 in Uttara and zone in Uttara', 'bproperty-12947':'This 3000.0 Sq ft area of the Rent Office in a commercial property and priced at BDT 160000.0 in Uttara zone in Uttara', 'bproperty-13462':'This 1600.0 Sq ft area of the Rent Office in a commercial property and priced at BDT 109000.0 in Motijheel zone in Motijheel', 'bproperty-10701':'This 1247.0 Sq ft area of the Sale Office in a commercial property and priced at BDT 11800000.0 in Motijheel zone in Motijheel', 'bproperty-12463':'This 5000.0 Sq ft area of the Rent Office in a commercial property and priced at BDT 300000.0 in Double Mooring zone in Chattogram City', 'bproperty-1037':'This 1300.0 square feet Area of the Sale Apartment is a residential property with 3.0 bedrooms and 3.0 baths and priced at BDT 6500000.0 in 7 No. West Sholoshohor Ward and zone in Chattogram City'}
 
 r_type = st.radio("Select Recommendation Type",   ( 'SBERT','TFIDF'))
 
