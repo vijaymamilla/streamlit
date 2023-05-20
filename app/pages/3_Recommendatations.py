@@ -122,4 +122,3 @@ if option and r_type:
         recommend(option)
     else:
         sbert_recommendation(property_dist[option])
-
