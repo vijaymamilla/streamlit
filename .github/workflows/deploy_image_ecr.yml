@@ -1,13 +1,13 @@
----
-name: Build and Push StreamLit and ML Models to AWS ECR
+
+name: Deploy to ECR
 on:
   push:
     branches: [ manual ]
   workflow_dispatch:
-    
+
 jobs:
-  build-and-push:
-    name: Build and Push to ECR
+  build:
+    name: Build Image
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
