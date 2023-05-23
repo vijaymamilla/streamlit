@@ -4,3 +4,4 @@ matplotlib
 scikit-learn
 category_encoders
 joblib
+bz2file
