@@ -1,4 +1,4 @@
-Streamlit Cloud - https://testapp.streamlit.app/Recommendatations
+Streamlit Cloud - https://property-recommendation-bl.streamlit.app/Recommendatations
 
 # Streamlit Project with Machine Learning Models and AWS Docker Deployment
 
